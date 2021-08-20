@@ -14,6 +14,7 @@ import com.ubudu.sdk.UbuduSDK
 import android.content.pm.PackageManager
 import androidx.core.content.ContextCompat
 import android.os.Build
+import android.util.Log
 import com.ubudu.sdk.UbuduCompletionCallback
 import com.ubudu.sdk.UbuduUser
 
@@ -55,7 +56,7 @@ class MainActivity : AppCompatActivity() {
                 ) != PackageManager.PERMISSION_GRANTED
             ) {
                 requestPermissions(
-                    arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                    arrayOf(Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_BACKGROUND_LOCATION),
                     ASK_GEOLOCATION_PERMISSION_REQUEST
                 )
             } else {
@@ -92,7 +93,7 @@ class MainActivity : AppCompatActivity() {
     private fun initUbuduContextualSDK() {
         mSDK = UbuduSDK.getSharedInstance(applicationContext)
         mSDK.setAutoRestartDelayMillis(10000L)
-        mSDK.setNamespace("9559c95b1e708e8f1876c4af2c48f5c97bb8207c")
+        mSDK.setNamespace("bb80ac3a01b73f039fdd0155f0b06d0cc1996742")
         mSDK.setUserInformation(object : UbuduUser {
             override fun userId(): String {
                 return ""
@@ -112,6 +113,11 @@ class MainActivity : AppCompatActivity() {
                 mBeaconManager = mSDK.beaconManager
                 mBeaconManager.setEnableAutomaticUserNotificationSending(false)
                 mBeaconManager.setAreaDelegate(MyAreaDelegate())
+
+                mBeaconManager.setRangedBeaconsNotifier {
+                    Log.i("test","scanned beacons ${it.size}")
+                }
+
                 mBeaconManager.start()
             }
 
