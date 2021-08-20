@@ -49,7 +49,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
     // ubudu contextual interactions sdk
-    implementation('com.ubudu.sdk:ubudu-sdk:2.8.2-SNAPSHOT@aar') {
+    implementation('com.ubudu.sdk:ubudu-sdk:2.8.2@aar') {
         transitive = true
     }
 
