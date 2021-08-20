@@ -114,6 +114,8 @@ class MainActivity : AppCompatActivity() {
                 mBeaconManager.setEnableAutomaticUserNotificationSending(false)
                 mBeaconManager.setAreaDelegate(MyAreaDelegate())
 
+                mBeaconManager.setForegroundServiceNotification(BackgroundNotification.getForegroundServiceNotification(applicationContext), 5422)
+
                 mBeaconManager.setRangedBeaconsNotifier {
                     Log.i("test","scanned beacons ${it.size}")
                 }
